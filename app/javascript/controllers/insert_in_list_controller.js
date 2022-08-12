@@ -3,6 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="insert-in-list"
 export default class extends Controller {
   static targets = ['items', 'form']
+  static values = { position: String}
   connect() {
     // console.log('i am connected');
     // console.log('my form', this.formTarget);
@@ -25,7 +26,7 @@ export default class extends Controller {
         console.log(data)
         // insert the review inside of the list of items at the end
         if (data.inserted_item) {
-          this.itemsTarget.insertAdjacentHTML('beforeend', data.inserted_item )
+          this.itemsTarget.insertAdjacentHTML((this.positionValue), data.inserted_item )
         }
         this.formTarget.outerHTML = data.form
       })
